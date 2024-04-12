@@ -77,7 +77,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [✓] Commit: `Implement receive function in Notification controller.`
     -   [✓] Commit: `Implement list_messages function in Notification service.`
     -   [✓] Commit: `Implement list function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
+    -   [✓] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -104,3 +104,30 @@ tidak dibuat untuk mempersulit developer, namun untuk menjaga agar program dapat
 dan dikembangkan dalam perubahan atau modifikasi selanjutnya.
 
 #### Reflection Subscriber-2
+1. Have you explored things outside of the steps in the tutorial, for example: src/lib.rs? If not,
+   explain why you did not do so. If yes, explain things that you have learned from those other
+   parts of code.
+
+Saya telah melihat beberapa bagian dari proyek ini di luar perintah tutorial. Sebagai contoh, saya melihat bahwa src/lib.rs
+memuat beberapa fungsi yang dirujuk ke bagian lain seperti compose_error_response yang digunakan di src/service/notifications.rs
+untuk membuat status error. Selain itu, lib.rs juga memuat deskripsi untuk setup aplikasi agar bisa dijalankan.
+
+2. Since you have completed the tutorial by now and have tried to test your notification system
+   by spawning multiple instances of Receiver, explain how Observer pattern eases you to plug
+   in more subscribers. How about spawning more than one instance of Main app, will it still be
+   easy enough to add to the system?
+
+Saya telah mengetes jika membuat lebih dari satu receiver (cargo run local port 8001, 8002, dan 8003) dan ketika saya menjalankan
+tes untuk menerima notifikasi, saya lalu melihat bahwa ketiga instance tersebut mampu menerima notifikasi, yang membuktikan
+bahwa satu sistem bisa memberikan notifikasi ke berbagai subscriber. Sepertinya jika kita tambah satu lagi instance main app
+akan memiliki pengaruh yang sama. Kita mungkin bisa menganggapnya sebagai suatu receiver yang mengsubscribe untuk mendapat
+notifikasi dari beberapa publisher berbeda.
+
+3. Have you tried to make your own Tests, or enhance documentation on your Postman
+   collection? If you have tried those features, tell us whether it is useful for your work (it can be
+   your tutorial work or your Group Project).
+
+Saya belum membuat tes sendiri tapi saya sudah mencoba sedikit-sedikit mengubah-ubah isi template postman untuk tes saya sendiri.
+Saya telah mencoba merubah beberapa variabel serta port nya untuk mengetes apakah program masih bekerja, dan sejauh ini 
+masih bisa. Menurut saya melakukan hal ini telah membuat saya lebih paham atas cara kerja observer design pattern yang digunakan
+di tutorial ini, dan saya harap saya dapat mengaplikasikannya dalam tugas kelompok saya juga.

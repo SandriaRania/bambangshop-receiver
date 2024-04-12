@@ -51,7 +51,7 @@ impl NotificationService {
     pub fn subscribe(product_type: &str) -> Result<SubscriberRequest> {
         let product_type_clone = String::from(product_type);
         return thread::spawn(move || Self::subscribe_request(product_type_clone))
-            .joim().unwrap();
+            .join().unwrap();
     }
 
     #[tokio::main]
@@ -66,7 +66,6 @@ impl NotificationService {
             .post(request_url.clone())
             .header("Content-Type", "application/json")
             .header("Accept", "application/json")
-            .body(to_string(&payload).unwrap())
             .send().await;
         log::warn_!("Sent unsubscribe request to: {}", request_url);
 
