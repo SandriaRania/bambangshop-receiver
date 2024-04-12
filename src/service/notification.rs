@@ -2,7 +2,7 @@ use std::thread;
 
 use rocket::http::Status;
 use rocket::log;
-use rocket::serde::json::to_string;
+use rocket::serde::json::{Json, to_string};
 use rocket::tokio;
 
 use bambangshop_receiver::{APP_CONFIG, REQWEST_CLIENT, Result, compose_error_response};
@@ -88,6 +88,11 @@ impl NotificationService {
     pub fn unsubscribe(product_type: &str) -> Result<SubscriberRequest> {
         let product_type_clone = String::from(product_type);
         return thread::spawn(move || Self::unsubscribe_request(product_type_clone))
-            .joim().unwrap();
+            .join().unwrap();
+    }
+
+    pub fn receive_notification(payload: Notification) -> Result <Notification> {
+        let subscriber_result: Notification = NotificationRepository::add(payload);
+        return Ok(subscriber_result);
     }
 }
