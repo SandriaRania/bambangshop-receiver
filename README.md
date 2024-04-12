@@ -66,7 +66,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [✓] Commit: `Create Notification database and Notification repository struct skeleton.`
     -   [✓] Commit: `Implement add function in Notification repository.`
     -   [✓] Commit: `Implement list_all_as_string function in Notification repository.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
+    -   [✓] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 3: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -85,5 +85,22 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+1. In this tutorial, we used RwLock<> to synchronise the use of Vec of Notifications. Explain why
+   it is necessary for this case, and explain why we do not use Mutex<> instead?
+
+RwLock akan membolehkan beberapa reader lock atau khusus satu writer lock, yang artinya ia memperbolehkan beberapa orang 
+membaca atau satu orang menulis, namun tidak keduanya. Sedangkan Mutex tidak membedakan antara writer dan reader, ketika
+ada yang melock, maka tidak ada yang bisa mengaksesnya. Dalam konteks sinkronisasi notifikasi, karena hanya ada satu pihak
+yang menulis(publisher) dan beberapa yang membaca(subscriber) maka RwLock lebih sesuai dalam konteks tersebut. Pemakaian Mutex
+mungkin bisa dilakukan namun sepertinya akan lebih sulit ketika lebih banyak pihak yang terlibat.
+
+2. In this tutorial, we used lazy_static external library to define Vec and DashMap as a “static”
+   variable. Compared to Java where we can mutate the content of a static variable via a
+   static function, why did not Rust allow us to do so?
+
+Rust umumnya tidak memperbolehkan perubahan mutable ke static variable begitu saja karena keamanan dan concurrency. Dibandingkan 
+Java, Rust harus memperhatikan beberapa hal seperti thread safety, data races, memory safety, dan lainnya. Namun hal ini 
+tidak dibuat untuk mempersulit developer, namun untuk menjaga agar program dapat berjalan lebih aman, lancar, dan mudah dikelola
+dan dikembangkan dalam perubahan atau modifikasi selanjutnya.
 
 #### Reflection Subscriber-2
